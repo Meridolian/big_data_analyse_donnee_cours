@@ -14,7 +14,7 @@ def max_temps():
     df = pd.read_csv(test_file)
     temps = []
     for index, row in df.iterrows():
-        infos = row[0]
+        infos = row[0].strip()
         temp = infos[87:92]
         if temp != "+9999":
             temps.append(int(temp))

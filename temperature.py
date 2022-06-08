@@ -4,13 +4,36 @@ import pandas as pd
 test_file = "1901"
 
 
-def all_temps():
+########## PYTHON ONLY ##########
+
+
+def python_all_temps():
+    with open(test_file, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            print(line.strip()[87:92])
+
+
+def python_max_temps():
+    temps = []
+    with open(test_file, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            temp = line.strip()[87:92]
+            if temp != "+9999":
+                temps.append(int(temp))
+    print(f"max temp : {max(temps)}")
+
+
+########## PANDAS ##########
+
+def pandas_all_temps():
     df = pd.read_csv(test_file)
     for index, row in df.iterrows():
         print(row[0].strip()[87:92])
 
 
-def max_temps():
+def pandas_max_temps():
     df = pd.read_csv(test_file)
     temps = []
     for index, row in df.iterrows():
@@ -21,6 +44,19 @@ def max_temps():
     print(f"Max temp : {max(temps)}")
 
 
+########## PYARROW ##########
+
+
+def pyarrow_all_temps():
+    pass
+
+
+def pyarrow_max_temps():
+    pass
+
+
+########## PYSPARK ##########
+
+
 if __name__ == '__main__':
-    all_temps()
-    max_temps()
+    python_max_temps()

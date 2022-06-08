@@ -1,4 +1,5 @@
 import pandas as pd
+from pyarrow import csv
 
 
 test_file = "1901"
@@ -48,15 +49,23 @@ def pandas_max_temps():
 
 
 def pyarrow_all_temps():
-    pass
+    df = csv.read_csv(test_file)
+    for line in df[0]:
+        print(str(line)[87:92])
 
 
 def pyarrow_max_temps():
-    pass
+    df = csv.read_csv(test_file)
+    temps = []
+    for line in df[0]:
+        temp = str(line)[87:92]
+        if temp != "+9999":
+            temps.append(int(temp))
+    print(f"max temp : {max(temps)}")
 
 
 ########## PYSPARK ##########
 
 
 if __name__ == '__main__':
-    python_max_temps()
+    pyarrow_max_temps()
